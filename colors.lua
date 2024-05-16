@@ -38,6 +38,14 @@ local function parse_palette(name)
     end
 end
 
+local function parse_mapcolors()
+    for name, def in pairs(minetest.registered_nodes) do
+        if def.mapcolor then
+            node_colors[name] = def.mapcolor
+        end
+    end
+end
+
 local function init()
     parse_file("advtrains.txt")
     parse_file("everness.txt")
@@ -49,6 +57,7 @@ local function init()
     parse_file("scifi_nodes.txt")
     parse_file("vanessa.txt")
     parse_palette("unifieddyes_palette_extended")
+    parse_mapcolors()
 end
 
 local is_initialized = false
