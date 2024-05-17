@@ -46,4 +46,8 @@ function isogen.draw_cube(data, width, cube_len, x_offset, y_offset, color1, col
 end
 
 -- image width: (x * cube_len / 2) + (z * cube_len / 2)
--- image height: (y * cube_len) - (cube_len / 2) -- XXX
+-- image height: Math.max(
+--    cube_len + ((x-1) * (cube_len / 4)),
+--    cube_len + ((z-1) * (cube_len / 4))),
+--    cube_len + ((y-1) * (cube_len / 2))
+--)

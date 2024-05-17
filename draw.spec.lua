@@ -14,7 +14,7 @@ mtt.register("draw cube", function(callback)
         png_data[i] = transparent
     end
 
-    isogen.draw_cube(png_data, width, 96, 0, 0, red, green, blue)
+    isogen.draw_cube(png_data, width, 24, 0, 0, red, green, blue)
     local png = minetest.encode_png(width, height, png_data)
 
     local path = minetest.get_worldpath() .. "/test.png"
