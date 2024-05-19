@@ -7,6 +7,10 @@ dofile(MP.."/canvas.lua")
 dofile(MP.."/draw_cube.lua")
 dofile(MP.."/draw.lua")
 
+if minetest.get_modpath("worldedit_commands") then
+    dofile(MP.."/chatcommand.lua")
+end
+
 if minetest.get_modpath("mtt") and mtt.enabled then
     dofile(MP.."/common.spec.lua")
     dofile(MP.."/colors.spec.lua")

@@ -13,5 +13,5 @@ read_globals = {
 	"VoxelArea",
 
 	-- deps
-	"mtt"
+	"mtt", "worldedit"
 }

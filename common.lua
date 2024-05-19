@@ -16,7 +16,7 @@ end
 -- all other positions are relative to this
 function isogen.get_center_cube_offset(size, cube_len)
     local x =
-        (size.x * cube_len / 2) -
+        (size.z * cube_len / 2) -
         (cube_len / 2)
     local y =
         (size.x * cube_len / 4) +
@@ -30,8 +30,8 @@ end
 -- returns the cube position offset relative to the center cube
 function isogen.get_cube_position(center_x, center_y, cube_len, _, pos)
     local x = center_x -
-        (pos.x * cube_len / 2) +
-        (pos.z * cube_len / 2)
+        (pos.z * cube_len / 2) +
+        (pos.x * cube_len / 2)
     local y = center_y -
         (pos.x * cube_len / 4) -
         (pos.y * cube_len / 2) -
