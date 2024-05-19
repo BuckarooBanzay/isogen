@@ -40,6 +40,12 @@ function isogen.get_cube_position(center_x, center_y, cube_len, _, pos)
     return x, y
 end
 
-function isogen.probe_position(pos1, pos2, pos, ipos)
-    -- TODO
+function isogen.probe_position(min, max, pos, ipos)
+    while vector.in_area(pos, min, max) do
+        local node = minetest.get_node(pos)
+        if node.name ~= "air" and node.name ~= "ignore" then
+            return node, pos
+        end
+        pos = vector.add(pos, ipos)
+    end
 end

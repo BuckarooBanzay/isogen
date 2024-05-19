@@ -1,0 +1,3 @@
+void_essential:stone 97 94 93
+void_essential:water_source 29 130 223
+void_essential:river_water_source 30 180 223

@@ -56,25 +56,26 @@ local function init()
     parse_file("nodecore.txt")
     parse_file("scifi_nodes.txt")
     parse_file("vanessa.txt")
+    parse_file("void.txt")
     parse_palette("unifieddyes_palette_extended")
     parse_mapcolors()
 end
 
 local is_initialized = false
-function isogen.get_color(nodename, param2)
+function isogen.get_color(node)
     if not is_initialized then
         init()
         is_initialized = true
     end
 
-    if palette_colors[nodename] and param2 then
+    if palette_colors[node.name] and node.param2 and node.param2 > 0 then
         -- param2 colored
-        return palette_colors[nodename][param2+1]
+        return palette_colors[node.name][node.param2+1]
     end
 
-    if node_colors[nodename] then
+    if node_colors[node.name] then
         -- simple color
-        return node_colors[nodename]
+        return node_colors[node.name]
     end
 
 end

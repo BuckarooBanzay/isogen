@@ -53,7 +53,6 @@ mtt.register("get_cube_position", function(callback)
 
     pos = vector.new(9, 9, 9)
     x, y = isogen.get_cube_position(center_x, center_y, cube_len, rotation, pos)
-    print(x, y)
     assert(x == 108)
     assert(y == 0)
 
@@ -64,7 +63,8 @@ mtt.register("probe_position", function(callback)
     local pos1 = vector.new(0, 0, 0)
     local pos2 = vector.new(15, 15, 15)
     local pos = vector.new(0, 15, 0)
-    local ipos = vector.new()
+    local ipos = vector.new(1, -1, 1)
 
+    isogen.probe_position(pos1, pos2, pos, ipos)
     callback()
 end)
