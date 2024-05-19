@@ -1,9 +1,5 @@
--- x and y are 0-based
-local function get_index(w, x, y)
-    return (w * y) + x + 1
-end
 
-function isogen.draw_cube(data, width, cube_len, x_offset, y_offset, color1, color2, color3)
+function isogen.draw_cube(canvas, cube_len, x_offset, y_offset, color1, color2, color3)
     assert(cube_len % 4 == 0, "cube_len must be divisible by 4")
     assert(cube_len > 4, "cube_len must be greater than 4")
 
@@ -15,11 +11,9 @@ function isogen.draw_cube(data, width, cube_len, x_offset, y_offset, color1, col
     for x=0,half_len_zero_indexed do
         for y=0,half_len_zero_indexed do
             -- left
-            local index = get_index(width, x_offset+x, y_offset+y+quarter_len+yo)
-            data[index] = color1
+            canvas:set_pixel(x_offset+x, y_offset+y+quarter_len+yo, color1)
             -- right
-            index = get_index(width, x_offset+cube_len-1-x, y_offset+y+quarter_len+yo)
-            data[index] = color2
+            canvas:set_pixel(x_offset+cube_len-1-x, y_offset+y+quarter_len+yo, color2)
         end
         if x % 2 == 0 then
             yo = yo + 1
@@ -32,11 +26,9 @@ function isogen.draw_cube(data, width, cube_len, x_offset, y_offset, color1, col
     for x=0,half_len_zero_indexed-1 do
         for y=0,yl do
             -- left
-            local index = get_index(width, x_offset+1+x, y_offset+quarter_len-1-yo+y)
-            data[index] = color3
+            canvas:set_pixel(x_offset+1+x, y_offset+quarter_len-1-yo+y, color3)
             -- right
-            index = get_index(width, x_offset+cube_len-2-x, y_offset+quarter_len-1-yo+y)
-            data[index] = color3
+            canvas:set_pixel(x_offset+cube_len-2-x, y_offset+quarter_len-1-yo+y, color3)
         end
         if x % 2 ~= 0 then
             yo = yo + 1
