@@ -1,5 +1,5 @@
 
-mtt.register("draw cube", function(callback)
+mtt.register("draw_cube", function(callback)
 
     local red = { a=255, r=255, g=0, b=0 }
     local green = { a=255, r=0, g=255, b=0 }
