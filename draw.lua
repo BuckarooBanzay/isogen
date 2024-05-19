@@ -2,7 +2,16 @@
 local function probe_and_add(list, min, max, pos, ipos)
     local node, npos = isogen.probe_position(min, max, pos, ipos)
     if node then
-        table.insert(list, { node = node, pos = npos })
+        local order =
+            npos.y +
+            ((max.x - npos.x) * max.x) +
+            ((max.z - npos.z) + max.z)
+
+        table.insert(list, {
+            node = node,
+            pos = npos,
+            order = order
+        })
     end
 end
 
@@ -60,8 +69,9 @@ function isogen.draw(pos1, pos2, _, cube_len)
         end
     end
 
-    print(dump(list))
-    print(#list)
+    table.sort(list, function(a, b)
+        return a.order < b.order
+    end)
 
     for _, entry in ipairs(list) do
         local rel_pos = vector.subtract(entry.pos, min)

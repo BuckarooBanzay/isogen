@@ -7,6 +7,9 @@ mtt.register("draw", function(callback)
     minetest.load_area(pos1, pos2)
 
     minetest.set_node(pos1, { name = "mapgen_stone" })
+    minetest.set_node(vector.add(pos1, vector.new(1, 0, 0)), { name = "mapgen_stone" })
+
+    -- sanity tests
     local node = minetest.get_node(pos1)
     assert(node.name ~= "air")
     assert(node.name ~= "ignore")
