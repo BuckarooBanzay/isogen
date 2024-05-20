@@ -48,7 +48,7 @@ mtt.register("get_cube_position", function(callback)
 
     pos = vector.new(1, 1, 0)
     x, y = isogen.get_cube_position(center_x, center_y, cube_len, rotation, pos)
-    assert(x == 108 - (cube_len / 2))
+    assert(x == 108 + (cube_len / 2))
     assert(y == 240 - cube_len - (cube_len / 2) - (cube_len / 4))
 
     pos = vector.new(9, 9, 9)

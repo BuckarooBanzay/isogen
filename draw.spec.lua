@@ -8,6 +8,9 @@ mtt.register("draw", function(callback)
 
     minetest.set_node(pos1, { name = "mapgen_stone" })
     minetest.set_node(vector.add(pos1, vector.new(1, 0, 0)), { name = "mapgen_stone" })
+    minetest.set_node(vector.add(pos1, vector.new(2, 0, 0)), { name = "mapgen_stone" })
+    minetest.set_node(vector.add(pos1, vector.new(0, 0, 1)), { name = "mapgen_water_source" })
+    minetest.set_node(vector.add(pos1, vector.new(1, 0, 1)), { name = "mapgen_water_source" })
 
     -- sanity tests
     local node = minetest.get_node(pos1)

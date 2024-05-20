@@ -2,11 +2,12 @@
 local function probe_and_add(list, min, max, pos, ipos)
     local node, npos = isogen.probe_position(min, max, pos, ipos)
     if node then
-        local rel_pos = vector.subtract(pos, min)
+        local rel_pos = vector.subtract(npos, min)
+        local rel_max = vector.subtract(max, min)
         local order =
-            npos.y +
-            ((max.x - rel_pos.x) * max.x) +
-            ((max.z - rel_pos.z) + max.z)
+            (rel_pos.y * (rel_max.x * rel_max.z)) +
+            (rel_max.x - rel_pos.x) +
+            (rel_max.z - rel_pos.z)
 
         table.insert(list, {
             node = node,
