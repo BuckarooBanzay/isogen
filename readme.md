@@ -5,6 +5,16 @@ Generate isometric images from ingame builds
 
 ![](./isogen.png)
 
+# Commands
+
+If the `worldedit` mod is present you can use the following command to render the current we-region to a png-file:
+
+```
+//isogen [filename]
+```
+
+**NOTE**: larger regions require more memory
+
 # Api
 
 ## `isogen.draw(pos1, pos2, rotation?, cube_len?)`
@@ -14,7 +24,7 @@ Renders an isometric image and returns the png data
 Example:
 ```lua
 local pos1 = vector.new(0,0,0)
-local pos2 = vector.new(16,16,16)
+local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
 local rotation = 0
 local cube_len = 24 -- multiple of 4 and greater than 4 pixels
 
