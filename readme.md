@@ -5,7 +5,7 @@
 ![](https://github.com/buckaroobanzay/isogen/workflows/test/badge.svg)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](license.txt)
 [![Download](https://img.shields.io/badge/Download-ContentDB-blue.svg)](https://content.minetest.net/packages/buckaroobanzay/isogen)
-[![Coverage Status](https://coveralls.io/repos/github/buckaroobanzay/isogen/badge.svg?branch=master)](https://coveralls.io/github/buckaroobanzay/isogen?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/BuckarooBanzay/isogen/badge.svg?branch=master)](https://coveralls.io/github/BuckarooBanzay/isogen?branch=master)
 
 
 Generate isometric images from ingame builds
