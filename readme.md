@@ -40,6 +40,21 @@ local path = minetest.get_worldpath() .. "/iso.png"
 minetest.safe_file_write(path, png)
 ```
 
+## `isogen.draw_map(pos1, pos2)`
+
+Renders a map image and returns the png data
+
+Example:
+```lua
+local pos1 = vector.new(0,0,0)
+local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
+
+-- render and save to world-directory
+local png = isogen.draw_map(pos1, pos2)
+local path = minetest.get_worldpath() .. "/map.png"
+minetest.safe_file_write(path, png)
+```
+
 ## `isogen.create_canvas(width, height)`
 
 Creates a canvas to set and get pixels

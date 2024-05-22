@@ -5,6 +5,7 @@ dofile(MP.."/common.lua")
 dofile(MP.."/colors.lua")
 dofile(MP.."/canvas.lua")
 dofile(MP.."/draw_cube.lua")
+dofile(MP.."/draw_map.lua")
 dofile(MP.."/draw.lua")
 
 if minetest.get_modpath("worldedit_commands") then

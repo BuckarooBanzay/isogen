@@ -59,6 +59,11 @@ function isogen.probe_position(min, max, pos, ipos, list)
                 order = order,
                 node = node
             })
+
+            if not color.a or color.a == 255 then
+                -- solid color
+                break
+            end
         end
         pos = vector.add(pos, ipos)
     end
