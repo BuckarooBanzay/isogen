@@ -8,6 +8,22 @@ function Canvas:get_index(x, y)
     return (self.width * y) + x + 1
 end
 
+function Canvas:add_pixel(x, y, fg)
+    fg.a = fg.a or 255
+
+    local i = self:get_index(x, y)
+    local bg = self.png_data[i]
+    local a = fg.a / 255
+    local ai = 1 - a
+
+    self.png_data[i] = {
+        r = ((fg.r * a) + (bg.r * ai)),
+        g = ((fg.g * a) + (bg.g * ai)),
+        b = ((fg.b * a) + (bg.b * ai)),
+        a = math.max(bg.a, fg.a)
+    }
+end
+
 function Canvas:set_pixel(x, y, colorspec)
     local i = self:get_index(x, y)
     self.png_data[i] = colorspec

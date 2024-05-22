@@ -40,14 +40,29 @@ function isogen.get_cube_position(center_x, center_y, cube_len, _, pos)
     return x, y
 end
 
-function isogen.probe_position(min, max, pos, ipos)
+function isogen.probe_position(min, max, pos, ipos, list)
+    list = list or {}
     while vector.in_area(pos, min, max) do
         local node = minetest.get_node(pos)
-        if node.name ~= "air" and node.name ~= "ignore" then
-            return node, pos
+        local color = isogen.get_color(node)
+        if color then
+            local rel_pos = vector.subtract(pos, min)
+            local rel_max = vector.subtract(max, min)
+            local order =
+                (rel_pos.y * (rel_max.x * rel_max.z)) +
+                (rel_max.x - rel_pos.x) +
+                (rel_max.z - rel_pos.z)
+
+            table.insert(list, {
+                pos = pos,
+                color = color,
+                order = order,
+                node = node
+            })
         end
         pos = vector.add(pos, ipos)
     end
+    return list
 end
 
 local function flip_pos(pos, max, axis)

@@ -1,22 +1,4 @@
 
-local function probe_and_add(list, min, max, pos, ipos)
-    local node, npos = isogen.probe_position(min, max, pos, ipos)
-    if node then
-        local rel_pos = vector.subtract(npos, min)
-        local rel_max = vector.subtract(max, min)
-        local order =
-            (rel_pos.y * (rel_max.x * rel_max.z)) +
-            (rel_max.x - rel_pos.x) +
-            (rel_max.z - rel_pos.z)
-
-        table.insert(list, {
-            node = node,
-            pos = npos,
-            order = order
-        })
-    end
-end
-
 local function clamp(v, min, max)
     if v > max then
         return max
@@ -53,21 +35,21 @@ function isogen.draw(pos1, pos2, cube_len)
     -- top layer
     for x=min.x, max.x do
         for z=min.z, max.z do
-            probe_and_add(list, min, max, vector.new(x, max.y, z), ipos)
+            isogen.probe_position(min, max, vector.new(x, max.y, z), ipos, list)
         end
     end
 
     -- left layer (without top stride)
     for x=min.x, max.x do
         for y=min.y, max.y-1 do
-            probe_and_add(list, min, max, vector.new(x, y, min.z), ipos)
+            isogen.probe_position(min, max, vector.new(x, y, min.z), ipos, list)
         end
     end
 
     -- right layer (without top and left stride)
     for z=min.z+1, max.z do
         for y=min.y, max.y-1 do
-            probe_and_add(list, min, max, vector.new(min.x, y, z), ipos)
+            isogen.probe_position(min, max, vector.new(min.x, y, z), ipos, list)
         end
     end
 
@@ -77,11 +59,9 @@ function isogen.draw(pos1, pos2, cube_len)
 
     for _, entry in ipairs(list) do
         local rel_pos = vector.subtract(entry.pos, min)
-        local color = isogen.get_color(entry.node)
-        if color then
-            local x, y = isogen.get_cube_position(center_x, center_y, cube_len, 0, rel_pos)
-            isogen.draw_cube(canvas, cube_len, x, y, color, color_adjust(color, -10), color_adjust(color, 10))
-        end
+        local color = entry.color
+        local x, y = isogen.get_cube_position(center_x, center_y, cube_len, 0, rel_pos)
+        isogen.draw_cube(canvas, cube_len, x, y, color, color_adjust(color, -10), color_adjust(color, 10))
     end
 
     return canvas:png()
