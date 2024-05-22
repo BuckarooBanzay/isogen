@@ -24,7 +24,7 @@ If the `worldedit` mod is present you can use the following command to render th
 
 # Api
 
-## `isogen.draw(pos1, pos2, rotation?, cube_len?)`
+## `isogen.draw(pos1, pos2, cube_len?)`
 
 Renders an isometric image and returns the png data
 
@@ -32,11 +32,10 @@ Example:
 ```lua
 local pos1 = vector.new(0,0,0)
 local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
-local rotation = 0
 local cube_len = 24 -- multiple of 4 and greater than 4 pixels
 
 -- render and save to world-directory
-local png = isogen.draw(pos1, pos2, rotation, cube_len)
+local png = isogen.draw(pos1, pos2, cube_len)
 local path = minetest.get_worldpath() .. "/iso.png"
 minetest.safe_file_write(path, png)
 ```

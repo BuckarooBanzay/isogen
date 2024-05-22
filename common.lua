@@ -49,3 +49,26 @@ function isogen.probe_position(min, max, pos, ipos)
         pos = vector.add(pos, ipos)
     end
 end
+
+local function flip_pos(pos, max, axis)
+	pos[axis] = max[axis] - pos[axis]
+end
+
+local function transpose_pos(pos, axis1, axis2)
+	pos[axis1], pos[axis2] = pos[axis2], pos[axis1]
+end
+
+function isogen.rotate_pos(pos, max_pos, rotation_y)
+	local new_pos = vector.new(pos.x, pos.y, pos.z)
+	if rotation_y == 90 then
+		flip_pos(new_pos, max_pos, "x")
+		transpose_pos(new_pos, "x", "z")
+	elseif rotation_y == 180 then
+		flip_pos(new_pos, max_pos, "x")
+		flip_pos(new_pos, max_pos, "z")
+	elseif rotation_y == 270 then
+		flip_pos(new_pos, max_pos, "z")
+		transpose_pos(new_pos, "x", "z")
+	end
+	return new_pos
+end

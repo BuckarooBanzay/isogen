@@ -36,7 +36,7 @@ local function color_adjust(c, v)
     }
 end
 
-function isogen.draw(pos1, pos2, _, cube_len)
+function isogen.draw(pos1, pos2, cube_len)
     local min, max = vector.sort(pos1, pos2)
     cube_len = cube_len or 24
 
