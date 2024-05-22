@@ -4,6 +4,9 @@ local node_colors = {}
 -- nodename -> { {r,g,b,a}, {...}, ... }
 local palette_colors = {}
 
+-- palette-name -> def
+local palettes = {}
+
 local MP = minetest.get_modpath("isogen")
 local function parse_file(filename)
     for line in io.lines(MP .. "/colors/" .. filename) do
@@ -30,6 +33,7 @@ local function parse_palette(name)
     local content = f:read("*all")
     f:close()
     local def = minetest.parse_json(content)
+    palettes[name] = def
 
     for line in io.lines(MP .. "/colors/" .. name .. ".txt") do
         if #line > 2 and line:sub(1,1) ~= "#" then
@@ -40,8 +44,15 @@ end
 
 local function parse_mapcolors()
     for name, def in pairs(minetest.registered_nodes) do
+        -- mapcolor attribute
         if def.mapcolor then
             node_colors[name] = def.mapcolor
+        end
+
+        -- unifieddyes palette
+        if def.palette and def.palette == "unifieddyes_palette_extended.png" then
+            node_colors[name] = nil
+            palette_colors[name] = palettes["unifieddyes_palette_extended"]
         end
     end
 end
