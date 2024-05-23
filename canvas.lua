@@ -8,8 +8,12 @@ function Canvas:get_index(x, y)
     return (self.width * y) + x + 1
 end
 
+-- add pixel with transparency
 function Canvas:add_pixel(x, y, fg)
-    fg.a = fg.a or 255
+    if not fg.a or fg.a == 255 then
+        -- solid color, no transparency
+        return self:set_pixel(x, y, fg)
+    end
 
     local i = self:get_index(x, y)
     local bg = self.png_data[i]
@@ -20,10 +24,11 @@ function Canvas:add_pixel(x, y, fg)
         r = ((fg.r * a) + (bg.r * ai)),
         g = ((fg.g * a) + (bg.g * ai)),
         b = ((fg.b * a) + (bg.b * ai)),
-        a = math.max(bg.a, fg.a)
+        a = math.max(bg.a or 255, fg.a)
     }
 end
 
+-- set a pixel
 function Canvas:set_pixel(x, y, colorspec)
     local i = self:get_index(x, y)
     self.png_data[i] = colorspec
