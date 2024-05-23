@@ -9,7 +9,7 @@ local palettes = {}
 
 local MP = minetest.get_modpath("isogen")
 local function parse_file(filename)
-    for line in io.lines(MP .. "/colors/" .. filename) do
+    for line in io.lines(filename) do
         if #line > 2 and line:sub(1,1) ~= "#" then
             local i = 1
             local name
@@ -58,18 +58,24 @@ local function parse_mapcolors()
 end
 
 local function init()
-    parse_file("advtrains.txt")
-    parse_file("everness.txt")
-    parse_file("mc2.txt")
-    parse_file("miles.txt")
-    parse_file("mtg.txt")
-    parse_file("naturalbiomes.txt")
-    parse_file("nodecore.txt")
-    parse_file("scifi_nodes.txt")
-    parse_file("vanessa.txt")
-    parse_file("void.txt")
+    parse_file(MP .. "/colors/" .. "advtrains.txt")
+    parse_file(MP .. "/colors/" .. "everness.txt")
+    parse_file(MP .. "/colors/" .. "mc2.txt")
+    parse_file(MP .. "/colors/" .. "miles.txt")
+    parse_file(MP .. "/colors/" .. "mtg.txt")
+    parse_file(MP .. "/colors/" .. "naturalbiomes.txt")
+    parse_file(MP .. "/colors/" .. "nodecore.txt")
+    parse_file(MP .. "/colors/" .. "scifi_nodes.txt")
+    parse_file(MP .. "/colors/" .. "vanessa.txt")
+    parse_file(MP .. "/colors/" .. "void.txt")
     parse_palette("unifieddyes_palette_extended")
     parse_mapcolors()
+
+    -- check for world-specific colors.txt file
+    local world_colors_filename = minetest.get_worldpath() .. "/colors.txt"
+    if io.open(world_colors_filename) then
+        parse_file(world_colors_filename)
+    end
 end
 
 local is_initialized = false

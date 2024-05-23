@@ -22,6 +22,14 @@ If the `worldedit` mod is present you can use the following command to render th
 
 **NOTE**: larger regions require more memory
 
+# Colors
+
+Supported node-colors:
+* colors.txt files in the `/colors` directory
+* palette-support for `unifieddyes_palette_extended`
+* `mapcolor` node definition
+* `colors.txt` file in the world-directory (if found)
+
 # Api
 
 ## `isogen.draw(pos1, pos2, cube_len?)`
