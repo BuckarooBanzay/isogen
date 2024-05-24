@@ -7,7 +7,7 @@ mtt.register("draw_cube", function(callback)
 
     local canvas = isogen.create_canvas(800, 600)
 
-    isogen.draw_cube(canvas, 24, 0, 0, red, green, blue)
+    isogen.draw_cube(canvas, 24, 0, 0, red, green, blue, minetest.get_node)
     local png = canvas:png()
 
     local path = minetest.get_worldpath() .. "/test.png"

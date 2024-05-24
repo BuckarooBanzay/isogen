@@ -1,5 +1,7 @@
 
-function isogen.draw_map(pos1, pos2)
+function isogen.draw_map(pos1, pos2, opts)
+    opts = opts or {}
+    opts.get_node = opts.get_node or minetest.get_node
     pos1, pos2 = vector.sort(pos1, pos2)
 
     minetest.load_area(pos1, pos2)
@@ -18,7 +20,7 @@ function isogen.draw_map(pos1, pos2)
             -- up-down
             for y=pos2.y,pos1.y,-1 do
                 local pos = vector.new(x, y, z)
-                local node = minetest.get_node(pos)
+                local node = opts.get_node(pos)
                 local color = isogen.get_color(node)
                 if color then
                     table.insert(list, color)

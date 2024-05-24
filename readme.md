@@ -32,7 +32,7 @@ Supported node-colors:
 
 # Api
 
-## `isogen.draw(pos1, pos2, cube_len?)`
+## `isogen.draw(pos1, pos2, opts?)`
 
 Renders an isometric image and returns the png data
 
@@ -40,15 +40,18 @@ Example:
 ```lua
 local pos1 = vector.new(0,0,0)
 local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
-local cube_len = 24 -- multiple of 4 and greater than 4 pixels
+local opts = { -- optional
+    cube_len = 24, -- optional: multiple of 4 and greater than 4 pixels
+    get_node = minetest.get_node -- optional: the get_node() function to use
+}
 
 -- render and save to world-directory
-local png = isogen.draw(pos1, pos2, cube_len)
+local png = isogen.draw(pos1, pos2, opts)
 local path = minetest.get_worldpath() .. "/iso.png"
 minetest.safe_file_write(path, png)
 ```
 
-## `isogen.draw_map(pos1, pos2)`
+## `isogen.draw_map(pos1, pos2, opts?)`
 
 Renders a map image and returns the png data
 
@@ -56,9 +59,12 @@ Example:
 ```lua
 local pos1 = vector.new(0,0,0)
 local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
+local opts = { -- optional
+    get_node = minetest.get_node -- optional: the get_node() function to use
+}
 
 -- render and save to world-directory
-local png = isogen.draw_map(pos1, pos2)
+local png = isogen.draw_map(pos1, pos2, opts)
 local path = minetest.get_worldpath() .. "/map.png"
 minetest.safe_file_write(path, png)
 ```

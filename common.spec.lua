@@ -65,6 +65,6 @@ mtt.register("probe_position", function(callback)
     local pos = vector.new(0, 15, 0)
     local ipos = vector.new(1, -1, 1)
 
-    isogen.probe_position(pos1, pos2, pos, ipos)
+    isogen.probe_position(pos1, pos2, pos, ipos, {}, minetest.get_node)
     callback()
 end)
