@@ -80,6 +80,10 @@ end
 
 local is_initialized = false
 function isogen.get_color(node)
+    if not node then
+        return
+    end
+
     if not is_initialized then
         init()
         is_initialized = true
