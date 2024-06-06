@@ -62,6 +62,10 @@ function isogen.draw(pos1, pos2, opts)
     for _, entry in ipairs(list) do
         local rel_pos = vector.subtract(entry.pos, min)
         local color = entry.color
+        if not opts.enable_transparency then
+            -- strip alpha channel from copied color
+            color = { r=color.r, g=color.g, b=color.b }
+        end
         local x, y = isogen.get_cube_position(center_x, center_y, opts.cube_len, 0, rel_pos)
         isogen.draw_cube(canvas, opts.cube_len, x, y, color, color_adjust(color, -10), color_adjust(color, 10))
     end

@@ -42,6 +42,7 @@ local pos1 = vector.new(0,0,0)
 local pos2 = vector.new(16,16,16) -- NOTE: larger regions require more memory
 local opts = { -- optional
     cube_len = 24, -- optional: multiple of 4 and greater than 4 pixels
+    enable_transparency = false, -- optional/experimental: enable transparency
     get_node = minetest.get_node -- optional: the get_node() function to use
 }
 
