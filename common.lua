@@ -40,7 +40,7 @@ function isogen.get_cube_position(center_x, center_y, cube_len, _, pos)
     return x, y
 end
 
-function isogen.probe_position(min, max, pos, ipos, list, get_node)
+function isogen.probe_position(min, max, pos, ipos, list, get_node, skip_alpha)
     while vector.in_area(pos, min, max) do
         local node = get_node(pos)
         local color = isogen.get_color(node)
@@ -59,8 +59,8 @@ function isogen.probe_position(min, max, pos, ipos, list, get_node)
                 node = node
             })
 
-            if not color.a or color.a == 255 then
-                -- solid color
+            if not color.a or color.a == 255 or skip_alpha then
+                -- solid color or skip-param set
                 break
             end
         end

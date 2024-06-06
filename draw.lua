@@ -33,25 +33,26 @@ function isogen.draw(pos1, pos2, opts)
 
     local ipos = vector.new(1, -1, 1)
     local list = {}
+    local skip_alpha = not opts.enable_transparency
 
     -- top layer
     for x=min.x, max.x do
         for z=min.z, max.z do
-            isogen.probe_position(min, max, vector.new(x, max.y, z), ipos, list, opts.get_node)
+            isogen.probe_position(min, max, vector.new(x, max.y, z), ipos, list, opts.get_node, skip_alpha)
         end
     end
 
     -- left layer (without top stride)
     for x=min.x, max.x do
         for y=min.y, max.y-1 do
-            isogen.probe_position(min, max, vector.new(x, y, min.z), ipos, list, opts.get_node)
+            isogen.probe_position(min, max, vector.new(x, y, min.z), ipos, list, opts.get_node, skip_alpha)
         end
     end
 
     -- right layer (without top and left stride)
     for z=min.z+1, max.z do
         for y=min.y, max.y-1 do
-            isogen.probe_position(min, max, vector.new(min.x, y, z), ipos, list, opts.get_node)
+            isogen.probe_position(min, max, vector.new(min.x, y, z), ipos, list, opts.get_node, skip_alpha)
         end
     end
 
