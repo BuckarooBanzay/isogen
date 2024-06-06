@@ -68,6 +68,9 @@ function isogen.draw(pos1, pos2, opts)
             color = { r=color.r, g=color.g, b=color.b }
         end
         local x, y = isogen.get_cube_position(center_x, center_y, opts.cube_len, 0, rel_pos)
+        assert(color.r, "red component not found in color for node '" .. entry.node.name .. "'")
+        assert(color.g, "green component not found in color for node '" .. entry.node.name .. "'")
+        assert(color.b, "blue component not found in color for node '" .. entry.node.name .. "'")
         isogen.draw_cube(canvas, opts.cube_len, x, y, color, color_adjust(color, -10), color_adjust(color, 10))
     end
 
