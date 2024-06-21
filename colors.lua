@@ -14,7 +14,7 @@ local function parse_file(filename)
             local i = 1
             local name
             local color = { r=0, g=0, b=0 }
-            for str in string.gmatch(line, "([^ ]+)") do
+            for str in string.gmatch(line, "([^ \t]+)") do
                 if i == 1 then name = str end
                 if i == 2 then color.r = tonumber(str) end
                 if i == 3 then color.g = tonumber(str) end

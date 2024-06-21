@@ -10,6 +10,11 @@ mtt.register("get_color", function(callback)
     assert(c.g == 207)
     assert(c.b == 191)
 
+    c = isogen.get_color({ name="homedecor:piano" })
+    assert(c.r == 61)
+    assert(c.g == 61)
+    assert(c.b == 61)
+
     c = isogen.get_color("stuff")
     assert(not c)
 
