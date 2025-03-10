@@ -24,11 +24,16 @@ function isogen.draw(pos1, pos2, opts)
     opts.get_node = opts.get_node or minetest.get_node
     opts.rotation = opts.rotation or 90
 
+    local min, max = vector.sort(pos1, pos2)
+
     if opts.rotation ~= 0 then
         opts.get_node = isogen.rotated_get_node(opts.get_node, opts.rotation, pos1, pos2)
+        if opts.rotation == 90 or opts.rotation == 270 then
+            local size = vector.subtract(max, min)
+            max.x = min.x + size.z
+            max.z = min.z + size.x
+        end
     end
-
-    local min, max = vector.sort(pos1, pos2)
 
     minetest.load_area(min, max)
 
