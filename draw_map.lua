@@ -2,12 +2,6 @@
 function isogen.draw_map(pos1, pos2, opts)
     opts = opts or {}
     opts.get_node = opts.get_node or minetest.get_node
-    opts.rotation = opts.rotation or 0
-
-    if opts.rotation ~= 0 then
-        opts.get_node = isogen.rotated_get_node(opts.get_node, opts.rotation, pos1, pos2)
-    end
-
     pos1, pos2 = vector.sort(pos1, pos2)
 
     minetest.load_area(pos1, pos2)
