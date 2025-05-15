@@ -31,3 +31,6 @@ planet_mars:bluemarble_polished 99 128 167
 planet_mars:redmarble 167 74 63
 planet_mars:redmarble_bricks 170 81 73
 planet_mars:redmarble_polished 166 75 65
+
+pick_and_place:handle 200 200 200
+pick_and_place:replacement 200 0 0

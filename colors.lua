@@ -1,11 +1,14 @@
 -- nodename -> {r,g,b,a}
 local node_colors = {}
+local node_color_count = 0
 
 -- nodename -> { {r,g,b,a}, {...}, ... }
 local palette_colors = {}
+local palette_color_count = 0
 
 -- palette-name -> def
 local palettes = {}
+
 
 local MP = minetest.get_modpath("isogen")
 local function parse_file(filename)
@@ -24,6 +27,7 @@ local function parse_file(filename)
                 i = i + 1
             end
             node_colors[name] = color
+            node_color_count = node_color_count + 1
         end
     end
 end
@@ -38,6 +42,7 @@ local function parse_palette(name)
     for line in io.lines(MP .. "/colors/" .. name .. ".txt") do
         if #line > 2 and line:sub(1,1) ~= "#" then
             palette_colors[line] = def
+            palette_color_count = palette_color_count + 1
         end
     end
 end
@@ -51,7 +56,6 @@ local function parse_mapcolors()
 
         -- unifieddyes palette
         if def.palette and def.palette == "unifieddyes_palette_extended.png" then
-            node_colors[name] = nil
             palette_colors[name] = palettes["unifieddyes_palette_extended"]
         end
     end
@@ -68,6 +72,7 @@ local function init()
     parse_file(MP .. "/colors/" .. "scifi_nodes.txt")
     parse_file(MP .. "/colors/" .. "vanessa.txt")
     parse_file(MP .. "/colors/" .. "void.txt")
+    parse_file(MP .. "/colors/" .. "custom.txt")
     parse_palette("unifieddyes_palette_extended")
     parse_mapcolors()
 
@@ -76,12 +81,22 @@ local function init()
     if io.open(world_colors_filename) then
         parse_file(world_colors_filename)
     end
+
+    minetest.log(
+        "action",
+        string.format("[isogen] loaded %d node colors and %d palette colors", node_color_count, palette_color_count)
+    )
 end
 
 local is_initialized = false
 function isogen.get_color(node)
     if not node then
         return
+    end
+
+    if type(node) == "string" then
+        -- simple string arg
+        node = { name = node }
     end
 
     if not is_initialized then

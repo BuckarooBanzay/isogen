@@ -18,5 +18,8 @@ mtt.register("get_color", function(callback)
     c = isogen.get_color("stuff")
     assert(not c)
 
+    assert(isogen.get_color("scifi_nodes:rock"))
+    assert(isogen.get_color("pick_and_place:handle"))
+
     callback();
 end)
